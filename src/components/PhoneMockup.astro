@@ -1,0 +1,174 @@
+---
+// A 3D-tilted iPhone mockup playing a short video.
+// Depth comes from CSS perspective + preserve-3d (the design system disables
+// box-shadow globally, so the "shadow" is a blurred radial blob behind the phone).
+interface Props {
+  src?: string;
+  alt?: string;
+}
+const {
+  src = '/short-video-mockup.png',
+  alt = 'A short vertical video auto-cut and captioned by Videotrim',
+} = Astro.props;
+
+const actions = [
+  { icon: 'M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z', label: '24.1k' },
+  { icon: 'M21 11.5a8.4 8.4 0 01-8.5 8.5 8.4 8.4 0 01-4-1L3 21l1.5-4.5a8.4 8.4 0 01-1-4A8.4 8.4 0 0112 3a8.4 8.4 0 019 8.5z', label: '892' },
+  { icon: 'M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4-4 4M12 2v13', label: 'Share' },
+];
+---
+
+<div class="phone-scene">
+  <div class="phone-shadow" aria-hidden="true"></div>
+
+  <div class="phone">
+   <div class="phone-float">
+    <div class="phone-frame">
+      <div class="phone-island" aria-hidden="true"></div>
+
+      <div class="phone-screen">
+        <img src={src} alt={alt} class="phone-img" width="600" height="880" loading="eager" />
+
+        <!-- top progress segments -->
+        <div class="absolute inset-x-3 top-3 flex gap-1" aria-hidden="true">
+          <span class="h-0.5 flex-1 rounded-full bg-white/80"></span>
+          <span class="h-0.5 flex-1 rounded-full bg-white/30"></span>
+          <span class="h-0.5 flex-1 rounded-full bg-white/30"></span>
+        </div>
+
+        <!-- right action rail -->
+        <div class="absolute bottom-24 right-2.5 flex flex-col items-center gap-4 text-white" aria-hidden="true">
+          {actions.map((a) => (
+            <div class="flex flex-col items-center gap-1">
+              <span class="grid h-9 w-9 place-items-center rounded-full bg-white/15 backdrop-blur-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4.5 w-4.5"><path d={a.icon} /></svg>
+              </span>
+              <span class="text-[10px] font-semibold drop-shadow">{a.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- animated caption -->
+        <div class="absolute inset-x-0 bottom-12 flex justify-center px-5" aria-hidden="true">
+          <span class="rounded-md bg-black/55 px-2 py-1 text-center text-sm font-extrabold uppercase leading-tight tracking-tight text-white">
+            …and <span class="text-[#FFE600]">that changed</span> everything
+          </span>
+        </div>
+
+        <!-- handle / username -->
+        <div class="absolute bottom-4 left-4 right-14 text-white" aria-hidden="true">
+          <p class="text-xs font-bold">@thelonggame</p>
+          <p class="mt-0.5 text-[10px] text-white/80">Auto-clipped from Ep. 114 · 0:38</p>
+        </div>
+
+        <!-- subtle screen sheen -->
+        <div class="phone-sheen" aria-hidden="true"></div>
+      </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+<style>
+  .phone-scene {
+    position: relative;
+    width: 270px;
+    max-width: 74vw;
+    perspective: 1600px;
+  }
+
+  .phone {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(-18deg) rotateX(6deg) rotate(0.5deg);
+    transition: transform 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .phone:hover {
+    transform: rotateY(-7deg) rotateX(3deg) rotate(0deg);
+  }
+  .phone-float {
+    transform-style: preserve-3d;
+    animation: phone-float 6s ease-in-out infinite;
+  }
+
+  /* titanium rail + black bezel */
+  .phone-frame {
+    position: relative;
+    border-radius: 2.75rem;
+    padding: 0.5rem;
+    background:
+      linear-gradient(135deg, #4a4a4e 0%, #1b1b1d 28%, #0b0b0c 60%, #2c2c2f 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  /* faux side thickness pushed back in 3D space */
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2.75rem;
+    background: linear-gradient(135deg, #000, #1a1a1c);
+    transform: translateZ(-14px);
+    filter: brightness(0.6);
+  }
+
+  .phone-screen {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2.3rem;
+    aspect-ratio: 9 / 19.5;
+    background: #000;
+  }
+
+  .phone-img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 32%;
+  }
+
+  /* dynamic island */
+  .phone-island {
+    position: absolute;
+    top: 0.95rem;
+    left: 50%;
+    z-index: 10;
+    height: 1.4rem;
+    width: 5.5rem;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .phone-sheen {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 32%);
+    pointer-events: none;
+  }
+
+  /* ambient ground shadow (no box-shadow allowed) */
+  .phone-shadow {
+    position: absolute;
+    bottom: -6%;
+    left: 52%;
+    z-index: -1;
+    height: 70px;
+    width: 78%;
+    transform: translateX(-50%) rotateX(70deg);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.4), transparent 70%);
+    filter: blur(18px);
+  }
+
+  @keyframes phone-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .phone-float { animation: none; }
+  }
+</style>

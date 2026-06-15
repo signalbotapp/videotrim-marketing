@@ -1,0 +1,215 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PhoneMockup from '../components/PhoneMockup.astro';
+
+const useCases = [
+  {
+    audience: 'Podcasters',
+    title: 'Every episode, a week of clips',
+    body: 'Pull the sharpest moments from each recording and post them where your next listener is already scrolling.',
+    icon: 'mic',
+  },
+  {
+    audience: 'Video creators',
+    title: 'Feed the Shorts machine',
+    body: 'Repurpose long-form uploads into vertical Shorts and Reels — no re-editing, no second timeline.',
+    icon: 'video',
+  },
+  {
+    audience: 'Webinars & courses',
+    title: 'Promote the talk with the talk',
+    body: 'Slice highlights from webinars and lessons into bite-size promos that actually drive sign-ups.',
+    icon: 'presentation',
+  },
+  {
+    audience: 'Social & agencies',
+    title: 'Clip at agency scale',
+    body: 'Process client footage in bulk and ship on-brand, captioned clips for every channel at once.',
+    icon: 'megaphone',
+  },
+];
+
+const features = [
+  {
+    title: 'Moment detection that gets it',
+    body: 'Our model scores every segment on hook strength, story arc, and quotability — not just where the audio gets loud.',
+    icon: 'sparkles',
+  },
+  {
+    title: 'Captions, automatically',
+    body: 'Accurate transcription with animated, on-brand captions. Edit a word and the timing follows.',
+    icon: 'captions',
+  },
+  {
+    title: 'Reframed for vertical',
+    body: 'Smart speaker tracking keeps faces centered when we crop 16:9 down to 9:16 or 1:1.',
+    icon: 'crop',
+  },
+  {
+    title: 'One source, many clips',
+    body: 'Turn a single recording into a week of content. Batch export and download them all at once.',
+    icon: 'layers',
+  },
+  {
+    title: 'Your words, your style',
+    body: 'Caption fonts, colors, and positions that match your brand — saved as presets you reuse in a click.',
+    icon: 'palette',
+  },
+  {
+    title: 'Ready in minutes',
+    body: 'A 60-minute video becomes a batch of polished clips while you grab coffee. No timeline, no scrubbing.',
+    icon: 'zap',
+  },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: 'Upload anything long',
+    body: 'Drop in a podcast, webinar, interview, vlog, or stream recording. Up to 4 hours, any common format.',
+  },
+  {
+    n: '02',
+    title: 'AI finds the moments',
+    body: 'Videotrim reads the transcript and the visuals to surface the segments most likely to perform as shorts.',
+  },
+  {
+    n: '03',
+    title: 'Get captioned clips',
+    body: 'Export vertical, square, or wide clips with word-perfect animated captions — ready for every platform.',
+  },
+];
+
+const icons: Record<string, string> = {
+  // use cases
+  mic: 'M12 2a3 3 0 00-3 3v6a3 3 0 006 0V5a3 3 0 00-3-3zM19 11a7 7 0 01-14 0M12 18v4M8 22h8',
+  video: 'M23 7l-7 5 7 5V7zM1 6a1 1 0 011-1h13a1 1 0 011 1v12a1 1 0 01-1 1H2a1 1 0 01-1-1z',
+  presentation: 'M2 3h20M4 3v12h16V3M12 15v5m-3 1h6M8.5 10l2.5 2 3.5-4',
+  megaphone: 'M3 11v2a1 1 0 001 1h2l3 4V6L6 10H4a1 1 0 00-1 1zM14 7a4 4 0 010 8M9 6l11-3v18L9 18',
+  // features
+  sparkles: 'M12 3l1.9 4.8L18.7 9l-4.8 1.2L12 15l-1.9-4.8L5.3 9l4.8-1.2L12 3zM19 14l.9 2.3L22 17l-2.1.7L19 20l-.9-2.3L16 17l2.1-.7L19 14z',
+  captions: 'M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm3 8h5m-5 3h8m1-3h2',
+  crop: 'M6 2v14a2 2 0 002 2h14M2 6h14a2 2 0 012 2v14',
+  layers: 'M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5',
+  palette: 'M12 22a10 10 0 110-20 8 8 0 018 8 4 4 0 01-4 4h-2a2 2 0 00-1.4 3.4A2 2 0 0112 22zM7.5 11a1 1 0 100-2 1 1 0 000 2zm4-3a1 1 0 100-2 1 1 0 000 2zm5 3a1 1 0 100-2 1 1 0 000 2z',
+  zap: 'M13 2L3 14h7l-1 8 10-12h-7l1-8z',
+};
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="pointer-events-none absolute -top-32 left-1/2 h-80 w-[42rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 pt-16 pb-12 md:pt-24 lg:grid-cols-[2fr_1fr] lg:gap-8">
+      <!-- Left: copy -->
+      <div class="fade-in-up text-center lg:text-left">
+        <h1 class="text-balance font-display text-5xl leading-[1.05] md:text-6xl xl:text-7xl">
+          Auto-cut <span class="text-primary">short videos</span>
+        </h1>
+        <p class="text-balance mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mx-0">
+          Upload your longer video and Videotrim automatically detects highlights
+          and adds captions.
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+          <a href="/signup" class="btn btn-primary btn-lg">
+            Start free — no card needed
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="/pricing" class="btn btn-outline btn-lg">See pricing</a>
+        </div>
+        <p class="mt-4 text-xs text-muted-foreground">3 free videos every month · Cancel anytime</p>
+      </div>
+
+      <!-- Right: 3D phone -->
+      <div class="fade-in-up flex justify-center lg:justify-end">
+        <PhoneMockup />
+      </div>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="mx-auto max-w-6xl px-5 py-20">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow">Use cases</span>
+      <h2 class="text-balance mt-3 font-display text-4xl md:text-5xl">Made for anyone who records more than they post</h2>
+      <p class="mt-4 text-muted-foreground">If it's long and worth watching, there are clips inside it.</p>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {useCases.map((uc) => (
+        <div class="card-hover flex flex-col rounded-[var(--radius-card)] border border-card-border-subtle bg-card p-6">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+              <path d={icons[uc.icon]} />
+            </svg>
+          </span>
+          <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-primary">{uc.audience}</p>
+          <h3 class="mt-1.5 text-lg leading-snug">{uc.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{uc.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="bg-secondary/30 py-20">
+    <div class="mx-auto max-w-6xl px-5">
+      <div class="mx-auto max-w-2xl text-center">
+        <span class="eyebrow">Why Videotrim</span>
+        <h2 class="text-balance mt-3 font-display text-4xl md:text-5xl">Everything the edit used to take all day</h2>
+      </div>
+
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <div class="card-hover rounded-[var(--radius-card)] border border-card-border-subtle bg-card p-6">
+            <span class="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                <path d={icons[f.icon]} />
+              </svg>
+            </span>
+            <h3 class="mt-4 text-lg">{f.title}</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="mx-auto max-w-6xl px-5 py-20">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow">How it works</span>
+      <h2 class="text-balance mt-3 font-display text-4xl md:text-5xl">From upload to upload in three steps</h2>
+      <p class="mt-4 text-muted-foreground">No timeline to learn. No clips to hunt for. Just results.</p>
+    </div>
+
+    <div class="mt-14 grid gap-6 md:grid-cols-3">
+      {steps.map((step) => (
+        <div class="card-hover relative rounded-[var(--radius-card)] border border-card-border-subtle bg-card p-7">
+          <span class="font-display text-5xl text-primary/25">{step.n}</span>
+          <h3 class="mt-3 text-xl">{step.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA hero -->
+  <section class="mx-auto max-w-6xl px-5 pb-24">
+    <div class="relative overflow-hidden rounded-[var(--radius-card)] border border-card-border-subtle bg-card px-6 py-14 text-center md:py-20">
+      <div class="pointer-events-none absolute -bottom-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
+      <div class="relative">
+        <h2 class="text-balance mx-auto max-w-2xl font-display text-4xl md:text-5xl">
+          Your next video is hiding clips. Let's find them.
+        </h2>
+        <p class="mx-auto mt-4 max-w-md text-muted-foreground">
+          Start with three free videos. No credit card, no editing skills, no excuses.
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href="/signup" class="btn btn-primary btn-lg">Create free account</a>
+          <a href="/support" class="btn btn-outline btn-lg">Talk to us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

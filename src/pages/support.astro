@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const channels = [
+  {
+    title: 'Browse the help center',
+    body: 'Step-by-step guides for uploading, exporting, captions, and billing.',
+    action: 'Open docs',
+    href: '#topics',
+    icon: 'book',
+  },
+  {
+    title: 'Email support',
+    body: 'Real humans, usually back within a few hours. Studio plans get priority.',
+    action: 'support@videotrim.app',
+    href: 'mailto:support@videotrim.app',
+    icon: 'mail',
+  },
+  {
+    title: 'Community',
+    body: 'Swap caption presets and clip workflows with other creators.',
+    action: 'Join the community',
+    href: '#',
+    icon: 'users',
+  },
+];
+
+const icons: Record<string, string> = {
+  book: 'M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z',
+  mail: 'M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1zm1 2l7 5 7-5',
+  users: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm14 10v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',
+};
+
+const topics = [
+  { title: 'Getting started', desc: 'Upload your first video and export a clip in under five minutes.' },
+  { title: 'Clip detection', desc: 'How scoring works and how to nudge it toward the moments you want.' },
+  { title: 'Captions & styling', desc: 'Edit text, pick fonts and colors, and save brand presets.' },
+  { title: 'Reframing & formats', desc: 'Export 9:16, 1:1, and 16:9 with smart speaker tracking.' },
+  { title: 'Exporting & quality', desc: 'Resolutions, batch downloads, and watermark removal.' },
+  { title: 'Billing & plans', desc: 'Upgrades, invoices, quotas, and cancellations.' },
+];
+
+const faqs = [
+  {
+    q: 'What file formats can I upload?',
+    a: 'MP4, MOV, WebM, and most common containers. We also accept direct links from YouTube and Vimeo on paid plans.',
+  },
+  {
+    q: 'How long does processing take?',
+    a: 'Most videos finish in under five minutes. Very long uploads (multi-hour) can take a little longer; you’ll get an email when clips are ready.',
+  },
+  {
+    q: 'Can I edit a clip after it’s generated?',
+    a: 'Yes. Trim the in/out points, fix any caption wording, restyle captions, and re-export — no need to reprocess the source video.',
+  },
+  {
+    q: 'Is my content private?',
+    a: 'Your uploads and clips are private to your account. We don’t use your videos to train models, and you can delete them at any time.',
+  },
+  {
+    q: 'How do I cancel?',
+    a: 'Go to Account → Billing and cancel in one click. You keep access until the end of the period, and your clips stay downloadable.',
+  },
+];
+---
+
+<Layout
+  title="Support — Videotrim"
+  description="Get help with Videotrim. Guides, FAQs, and a real support team ready to help you ship clips."
+>
+  <section class="mx-auto max-w-6xl px-5 pt-16 pb-10 text-center md:pt-24">
+    <span class="eyebrow">Support</span>
+    <h1 class="text-balance mt-3 font-display text-5xl md:text-6xl">We're here to help you ship</h1>
+    <p class="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
+      Find an answer fast, or reach a human who actually uses the product.
+    </p>
+  </section>
+
+  <!-- Channels -->
+  <section class="mx-auto max-w-6xl px-5">
+    <div class="grid gap-5 md:grid-cols-3">
+      {channels.map((c) => (
+        <div class="card-hover flex flex-col rounded-[var(--radius-card)] border border-card-border-subtle bg-card p-6">
+          <span class="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d={icons[c.icon]} /></svg>
+          </span>
+          <h2 class="mt-4 text-lg">{c.title}</h2>
+          <p class="mt-1.5 flex-1 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
+          <a href={c.href} class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+            {c.action}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Topics -->
+  <section id="topics" class="mx-auto max-w-6xl px-5 py-20">
+    <h2 class="text-center font-display text-3xl md:text-4xl">Browse by topic</h2>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {topics.map((t) => (
+        <a href="#" class="card-hover rounded-[var(--radius-card)] border border-card-border-subtle bg-card p-5">
+          <h3 class="text-base font-semibold">{t.title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="mx-auto max-w-3xl px-5 pb-8">
+    <h2 class="text-center font-display text-3xl md:text-4xl">Frequently asked</h2>
+    <div class="mt-10 space-y-3">
+      {faqs.map((faq) => (
+        <details class="group rounded-[var(--radius-card)] border border-card-border-subtle bg-card p-5">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">
+            {faq.q}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{faq.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="mx-auto max-w-3xl px-5 py-16">
+    <div class="rounded-[var(--radius-card)] border border-card-border-subtle bg-card p-7 md:p-10">
+      <h2 class="font-display text-3xl">Still stuck? Send us a note.</h2>
+      <p class="mt-2 text-sm text-muted-foreground">
+        Tell us what's happening and we'll get back to you by email.
+      </p>
+      <form class="mt-7 grid gap-4" method="post" action="#">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block">
+            <span class="text-sm font-medium">Name</span>
+            <input type="text" name="name" required class="mt-1.5 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:border-primary" placeholder="Your name" />
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium">Email</span>
+            <input type="email" name="email" required class="mt-1.5 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:border-primary" placeholder="you@example.com" />
+          </label>
+        </div>
+        <label class="block">
+          <span class="text-sm font-medium">How can we help?</span>
+          <textarea name="message" rows="5" required class="mt-1.5 w-full resize-y rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:border-primary" placeholder="Describe the issue or question…"></textarea>
+        </label>
+        <div class="flex items-center justify-between gap-4">
+          <p class="text-xs text-muted-foreground">We typically reply within a few hours.</p>
+          <button type="submit" class="btn btn-primary">Send message</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</Layout>
