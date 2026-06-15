@@ -2,30 +2,40 @@
 import Layout from '../layouts/Layout.astro';
 import PhoneMockup from '../components/PhoneMockup.astro';
 
+// Four floating photo cards in a row — staggered vertical shift + rotation
+// per index so they "break the grid" instead of lining up neatly.
 const useCases = [
   {
+    img: '/use-case-podcast.png',
     audience: 'Podcasters',
     title: 'Every episode, a week of clips',
     body: 'Pull the sharpest moments from each recording and post them where your next listener is already scrolling.',
-    icon: 'mic',
+    shift: '2.5rem',
+    rot: '-2.5deg',
   },
   {
+    img: '/use-case-shorts.png',
     audience: 'Video creators',
     title: 'Feed the Shorts machine',
     body: 'Repurpose long-form uploads into vertical Shorts and Reels — no re-editing, no second timeline.',
-    icon: 'video',
+    shift: '-1.5rem',
+    rot: '2deg',
   },
   {
-    audience: 'Webinars & courses',
+    img: '/use-case-webinar.png',
+    audience: 'Webinars',
     title: 'Promote the talk with the talk',
-    body: 'Slice highlights from webinars and lessons into bite-size promos that actually drive sign-ups.',
-    icon: 'presentation',
+    body: 'Slice highlights from webinars into bite-size promos that actually drive sign-ups.',
+    shift: '3rem',
+    rot: '-1.5deg',
   },
   {
-    audience: 'Social & agencies',
-    title: 'Clip at agency scale',
-    body: 'Process client footage in bulk and ship on-brand, captioned clips for every channel at once.',
-    icon: 'megaphone',
+    img: '/use-case-course.png',
+    audience: 'Courses',
+    title: 'Turn lessons into lead magnets',
+    body: 'Cut your best teaching moments into free clips that send students straight to the full course.',
+    shift: '-1rem',
+    rot: '2.5deg',
   },
 ];
 
@@ -81,12 +91,6 @@ const steps = [
 ];
 
 const icons: Record<string, string> = {
-  // use cases
-  mic: 'M12 2a3 3 0 00-3 3v6a3 3 0 006 0V5a3 3 0 00-3-3zM19 11a7 7 0 01-14 0M12 18v4M8 22h8',
-  video: 'M23 7l-7 5 7 5V7zM1 6a1 1 0 011-1h13a1 1 0 011 1v12a1 1 0 01-1 1H2a1 1 0 01-1-1z',
-  presentation: 'M2 3h20M4 3v12h16V3M12 15v5m-3 1h6M8.5 10l2.5 2 3.5-4',
-  megaphone: 'M3 11v2a1 1 0 001 1h2l3 4V6L6 10H4a1 1 0 00-1 1zM14 7a4 4 0 010 8M9 6l11-3v18L9 18',
-  // features
   sparkles: 'M12 3l1.9 4.8L18.7 9l-4.8 1.2L12 15l-1.9-4.8L5.3 9l4.8-1.2L12 3zM19 14l.9 2.3L22 17l-2.1.7L19 20l-.9-2.3L16 17l2.1-.7L19 14z',
   captions: 'M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm3 8h5m-5 3h8m1-3h2',
   crop: 'M6 2v14a2 2 0 002 2h14M2 6h14a2 2 0 012 2v14',
@@ -127,26 +131,33 @@ const icons: Record<string, string> = {
     </div>
   </section>
 
-  <!-- Use cases -->
-  <section class="mx-auto max-w-6xl px-5 py-20">
-    <div class="mx-auto max-w-2xl text-center">
+  <!-- Use cases — floating, staggered photo stack -->
+  <section class="overflow-x-clip py-20">
+    <div class="mx-auto max-w-2xl px-5 text-center">
       <span class="eyebrow">Use cases</span>
       <h2 class="text-balance mt-3 font-display text-4xl md:text-5xl">Made for anyone who records more than they post</h2>
       <p class="mt-4 text-muted-foreground">If it's long and worth watching, there are clips inside it.</p>
     </div>
 
-    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="no-scrollbar relative mx-auto mt-20 flex max-w-7xl snap-x snap-mandatory items-center gap-6 overflow-x-auto px-5 py-12 lg:justify-center lg:gap-8 lg:overflow-visible">
       {useCases.map((uc) => (
-        <div class="card-hover flex flex-col rounded-[var(--radius-card)] border border-card-border-subtle bg-card p-6">
-          <span class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
-              <path d={icons[uc.icon]} />
-            </svg>
-          </span>
-          <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-primary">{uc.audience}</p>
-          <h3 class="mt-1.5 text-lg leading-snug">{uc.title}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{uc.body}</p>
-        </div>
+        <article
+          class="float-card group relative aspect-square w-[min(72vw,17rem)] shrink-0 snap-center overflow-hidden rounded-[var(--radius-card)] border border-card-border-subtle"
+          style={`--shift:${uc.shift};--rot:${uc.rot};`}
+        >
+          <img
+            src={uc.img}
+            alt={uc.title}
+            loading="lazy"
+            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
+            <p class="text-xs font-semibold uppercase tracking-wide text-white/70">{uc.audience}</p>
+            <h3 class="mt-1 font-display text-2xl leading-snug text-white">{uc.title}</h3>
+            <p class="reveal-text max-h-0 overflow-hidden text-sm leading-relaxed text-white/85 opacity-0 group-hover:mt-2.5 group-hover:max-h-40 group-hover:opacity-100">{uc.body}</p>
+          </div>
+        </article>
       ))}
     </div>
   </section>
