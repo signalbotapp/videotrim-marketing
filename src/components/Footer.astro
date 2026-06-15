@@ -2,38 +2,10 @@
 import Logo from './Logo.astro';
 
 const year = new Date().getFullYear();
-
-const groups = [
-  {
-    title: 'Product',
-    links: [
-      { href: '/', label: 'Overview' },
-      { href: '/pricing', label: 'Pricing' },
-      { href: '/signup', label: 'Get started' },
-      { href: '/login', label: 'Log in' },
-    ],
-  },
-  {
-    title: 'Resources',
-    links: [
-      { href: '/blog', label: 'Blog' },
-      { href: '/support', label: 'Support' },
-      { href: '/support#faq', label: 'FAQ' },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { href: '/support#contact', label: 'Contact' },
-      { href: '#', label: 'Privacy' },
-      { href: '#', label: 'Terms' },
-    ],
-  },
-];
 ---
 
 <footer class="relative z-10 border-t border-border/70">
-  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+  <div class="mx-auto max-w-6xl px-5 py-14">
     <div class="max-w-xs">
       <Logo class="h-5 w-auto text-primary" />
       <p class="mt-4 text-sm leading-relaxed text-muted-foreground">
@@ -41,23 +13,6 @@ const groups = [
         moments and captions them automatically.
       </p>
     </div>
-
-    {groups.map((group) => (
-      <div>
-        <h3 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground" style="font-family: var(--font-sans)">
-          {group.title}
-        </h3>
-        <ul class="mt-4 space-y-2.5">
-          {group.links.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
   </div>
 
   <div class="border-t border-border/70">
