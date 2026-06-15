@@ -3,6 +3,18 @@ import Layout from '../layouts/Layout.astro';
 
 const packs = [
   {
+    name: 'Free',
+    price: '€0',
+    tokens: 'forever',
+    perToken: '2 free tokens',
+    videos: '1 video',
+    blurb: 'Free to sign up — try it on your next upload.',
+    cta: 'Start free',
+    href: '/signup',
+    featured: false,
+    save: null,
+  },
+  {
     name: 'Starter',
     price: '€5',
     tokens: '10 tokens',
@@ -26,18 +38,6 @@ const packs = [
     featured: true,
     save: 'Save 20%',
   },
-  {
-    name: 'Studio',
-    price: '€40',
-    tokens: '120 tokens',
-    perToken: '€0.33 / token',
-    videos: '60 videos',
-    blurb: 'For teams shipping daily.',
-    cta: 'Buy 120 tokens',
-    href: '/signup?pack=studio',
-    featured: false,
-    save: 'Save 33%',
-  },
 ];
 
 // Everything is unlocked on every account — you only spend tokens per video.
@@ -53,7 +53,7 @@ const included = [
 
 <Layout
   title="Pricing — Videotrim"
-  description="Pay as you go with tokens — no subscription. €5 for 10 tokens, 2 tokens per video. Start with 4 free tokens."
+  description="Pay as you go with tokens — no subscription. €5 for 10 tokens, 2 tokens per video. Sign up free and get 2 tokens."
 >
   <section class="mx-auto max-w-6xl px-5 pt-16 pb-10 text-center md:pt-24">
     <span class="eyebrow">Pricing</span>
@@ -136,8 +136,8 @@ const included = [
   <!-- CTA -->
   <section class="mx-auto max-w-6xl px-5 pb-24">
     <div class="rounded-[var(--radius-card)] border border-card-border-subtle bg-card px-6 py-14 text-center">
-      <h2 class="font-display text-3xl md:text-4xl">Still deciding? Start with 4 free tokens.</h2>
-      <p class="mx-auto mt-3 max-w-md text-muted-foreground">Enough for 2 full videos. Buy a pack only once you’re hooked.</p>
+      <h2 class="font-display text-3xl md:text-4xl">Still deciding? Sign up free.</h2>
+      <p class="mx-auto mt-3 max-w-md text-muted-foreground">Get 2 free tokens — a full video on us. Buy a pack only once you’re hooked.</p>
       <a href="/signup" class="btn btn-primary btn-lg mt-7">Create free account</a>
     </div>
   </section>
