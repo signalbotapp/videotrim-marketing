@@ -7,6 +7,8 @@ const isActive = (href: string) =>
 
 const nav = [
   { href: '/', label: 'Home' },
+  { href: '/features', label: 'Features' },
+  { href: '/use-cases', label: 'Use cases' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
   { href: '/support', label: 'Support' },
@@ -40,9 +42,9 @@ const linkClass = (href: string) =>
     </div>
 
     <!-- Second-row nav (mobile only) -->
-    <nav class="flex items-center justify-center gap-1 pb-2 sm:hidden">
+    <nav class="no-scrollbar flex items-center justify-start gap-0.5 overflow-x-auto pb-2 sm:hidden">
       {nav.map((item) => (
-        <a href={item.href} class={linkClass(item.href)}>{item.label}</a>
+        <a href={item.href} class={`${linkClass(item.href)} shrink-0`}>{item.label}</a>
       ))}
     </nav>
   </div>

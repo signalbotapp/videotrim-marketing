@@ -101,7 +101,30 @@ const more = all.filter((p) => p.id !== post.id).slice(0, 2);
     margin-top: 2rem;
   }
   .post-body ul { padding-left: 1.25rem; list-style: disc; }
+  .post-body ol { padding-left: 1.25rem; list-style: decimal; }
   .post-body li + li { margin-top: 0.5rem; }
+  .post-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  .post-body thead th {
+    text-align: left;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    border-bottom: 2px solid hsl(var(--border));
+    padding: 0.6rem 0.75rem;
+  }
+  .post-body tbody td {
+    border-bottom: 1px solid hsl(var(--border));
+    padding: 0.6rem 0.75rem;
+    color: hsl(var(--foreground) / 0.85);
+    vertical-align: top;
+  }
+  .post-body tbody tr:first-child td { /* spacing handled by padding */ }
+  .post-body table + * { margin-top: 1.75rem; }
   .post-body a { color: hsl(var(--primary)); text-decoration: underline; text-underline-offset: 2px; }
   .post-body strong { font-weight: 600; color: hsl(var(--foreground)); }
   .post-body blockquote {

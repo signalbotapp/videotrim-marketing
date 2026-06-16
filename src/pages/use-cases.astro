@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Each audience gets a full alternating row. Images reuse the homepage stack.
+const audiences = [
+  {
+    id: 'podcasters',
+    img: '/use-case-podcast.png',
+    eyebrow: 'Podcasters',
+    title: 'Every episode is a week of clips',
+    body: 'A single hour-long episode is dense with quotable moments — the hot take, the laugh, the line that made your guest pause. Videotrim reads the whole transcript, scores each segment, and surfaces the ones worth posting so you stop scrubbing the timeline for "the good bits."',
+    points: [
+      'Find the sharpest 30 seconds in a 90-minute conversation',
+      'Auto-captions sized for a silent, scrolling feed',
+      'Restate-the-question clips that stand on their own',
+    ],
+    related: { label: 'Read: how podcasters double their reach', href: '/blog/how-podcasters-double-their-reach/' },
+  },
+  {
+    id: 'webinar-hosts',
+    img: '/use-case-webinar.png',
+    eyebrow: 'Webinar hosts',
+    title: 'Turn the replay nobody watches into promos that convert',
+    body: 'A 60-minute webinar has a handful of moments that actually sell the next one — the demo that lands, the objection you crushed, the stat that made the chat light up. Pull those into bite-size promos and put them where your next registrant is already scrolling.',
+    points: [
+      'Highlight reels from a recording you already have',
+      'Lead-gen clips that point back to the sign-up page',
+      'No re-editing — trim, caption, export',
+    ],
+    related: { label: 'Read: how to repurpose a webinar into clips', href: '/blog/repurpose-a-webinar-into-clips/' },
+  },
+  {
+    id: 'course-creators',
+    img: '/use-case-course.png',
+    eyebrow: 'Course creators',
+    title: 'Teach a little for free, sell the rest',
+    body: 'Your best teaching moments are the most persuasive ads you have. Cut a single module into a month of short lessons — each one proves you can teach, and each one sends the right viewer straight to the full course.',
+    points: [
+      'One module → a month of standalone teaching clips',
+      'Hooks built from the promise of the lesson',
+      'Consistent caption style across every clip',
+    ],
+    related: { label: 'Read: one course module into a month of content', href: '/blog/one-course-module-into-a-month-of-content/' },
+  },
+  {
+    id: 'video-creators',
+    img: '/use-case-shorts.png',
+    eyebrow: 'Video creators',
+    title: 'Feed Shorts, Reels, and TikTok from one upload',
+    body: 'You already make long-form. The hard part is showing up daily on the short-form feeds that grow your channel. Repurpose every upload into vertical clips — captioned, reframed, and ready — without living in a second editing app.',
+    points: [
+      'Long-form upload → a batch of vertical clips',
+      'Reframed for vertical or kept wide, your call',
+      'Ship daily without a daily edit',
+    ],
+    related: { label: 'Read: the fastest way to repurpose a YouTube video', href: '/blog/repurpose-youtube-into-tiktok-reels-shorts/' },
+  },
+];
+---
+
+<Layout
+  title="Use cases — who Videotrim is for"
+  description="Podcasters, webinar hosts, course creators, and video creators all sit on hours of footage. See how each turns long recordings into short clips that get watched."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="pointer-events-none absolute -top-32 left-1/2 h-80 w-[42rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="mx-auto max-w-3xl px-5 pt-16 pb-10 text-center md:pt-24">
+      <span class="eyebrow">Use cases</span>
+      <h1 class="text-balance mt-3 font-display text-5xl leading-[1.05] md:text-6xl">
+        If you record more than you post, this is for you
+      </h1>
+      <p class="text-balance mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
+        The same problem shows up everywhere: hours of good footage, no time to
+        cut it down. Here's how four kinds of creators use Videotrim to fix that.
+      </p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/signup" class="btn btn-primary btn-lg">Start free — no card needed</a>
+        <a href="/features" class="btn btn-outline btn-lg">See the features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audience rows -->
+  <section class="mx-auto max-w-6xl space-y-28 px-5 py-24 md:space-y-36 md:py-28">
+    {audiences.map((a, i) => (
+      <article id={a.id} class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div class={`overflow-hidden rounded-[var(--radius-card)] border border-card-border-subtle ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+          <img
+            src={a.img}
+            alt={`${a.eyebrow} using Videotrim`}
+            loading="lazy"
+            class="aspect-[4/3] h-full w-full object-cover"
+          />
+        </div>
+        <div class={i % 2 === 1 ? 'lg:order-1' : ''}>
+          <span class="eyebrow">{a.eyebrow}</span>
+          <h2 class="text-balance mt-3 font-display text-3xl md:text-4xl">{a.title}</h2>
+          <p class="mt-4 leading-relaxed text-muted-foreground">{a.body}</p>
+          <ul class="mt-6 space-y-3">
+            {a.points.map((p) => (
+              <li class="flex items-start gap-2.5 text-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 h-4 w-4 shrink-0 text-primary"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="text-foreground/90">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={a.related.href} class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+            {a.related.label}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <!-- CTA -->
+  <section class="relative overflow-hidden bg-card px-6 py-28 text-center md:py-36">
+    <div class="pointer-events-none absolute -bottom-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="relative">
+      <h2 class="text-balance mx-auto max-w-2xl font-display text-4xl md:text-5xl">
+        Don't see your exact use case?
+      </h2>
+      <p class="mx-auto mt-4 max-w-md text-muted-foreground">
+        If it's long and worth watching, there are clips inside it. Upload
+        something and find out — your first video is on us.
+      </p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/signup" class="btn btn-primary btn-lg">Create free account</a>
+        <a href="/pricing" class="btn btn-outline btn-lg">See pricing</a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,98 +1,44 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PhoneMockup from '../components/PhoneMockup.astro';
-
-// Four floating photo cards in a row — staggered vertical shift + rotation
-// per index so they "break the grid" instead of lining up neatly.
-const useCases = [
-  {
-    img: '/use-case-podcast.png',
-    audience: 'Podcasters',
-    title: 'Turn episodes into clips',
-    body: 'Pull the sharpest moments from each recording and post them where your next listener is already scrolling.',
-    shift: '2.5rem',
-    rot: '-2.5deg',
-  },
-  {
-    img: '/use-case-shorts.png',
-    audience: 'Video creators',
-    title: 'More Shorts and Reels',
-    body: 'Repurpose long-form uploads into Shorts and Reels.',
-    shift: '-1.5rem',
-    rot: '2deg',
-  },
-  {
-    img: '/use-case-webinar.png',
-    audience: 'Webinars',
-    title: 'Promote your webinars',
-    body: 'Slice highlights from webinars into bite-size promos that actually drive sign-ups.',
-    shift: '3rem',
-    rot: '-1.5deg',
-  },
-  {
-    img: '/use-case-course.png',
-    audience: 'Courses',
-    title: 'Get more students',
-    body: 'Cut your best teaching moments into free clips that send students straight to the full course.',
-    shift: '-1rem',
-    rot: '2.5deg',
-  },
-];
 
 const features = [
   {
-    title: 'Finds the best moments',
-    body: 'Our model picks the segments worth clipping — strong hooks, clear stories, quotable lines.',
     icon: 'sparkles',
+    title: 'Moment detection',
+    body: 'Videotrim transcribes your video, then scores every segment on hook strength, story arc, and quotability. You get a ranked list of the best moments instead of a blank timeline to scrub.',
   },
   {
-    title: 'Captions, automatically',
-    body: 'Accurate captions added to every clip. Edit a word and the timing follows.',
     icon: 'captions',
+    title: 'Word-perfect captions',
+    body: 'Accurate, word-by-word captions added to every clip automatically — the rhythm that holds attention on a silent feed. Fix a word and the timing follows; nothing to re-sync by hand.',
   },
   {
-    title: 'Vertical or horizontal',
-    body: 'Works with both vertical and horizontal videos, ready for any platform.',
     icon: 'crop',
+    title: 'Vertical or wide reframing',
+    body: 'Export tall for Shorts, Reels, and TikTok, or keep it wide for YouTube and LinkedIn — nudge the framing so your subject sits where you want it.',
   },
   {
-    title: 'One source, many clips',
-    body: 'Turn a single recording into a batch of ready-to-post clips.',
     icon: 'layers',
+    title: 'One source, many clips',
+    body: 'Turn a single recording into a batch of ready-to-post clips in one pass. Record once, harvest a week of content, export the keepers together.',
   },
   {
-    title: 'Your words, your style',
-    body: 'Choose from multiple caption presets to match your video.',
     icon: 'palette',
+    title: 'Caption styles that are yours',
+    body: 'Choose from multiple caption presets to match your look. Save your font, color, and placement once and every clip carries the same signature.',
   },
   {
-    title: 'Ready in minutes',
-    body: 'A long video becomes polished clips while you grab coffee. No timeline, no scrubbing.',
     icon: 'zap',
+    title: 'Clean cuts, fast',
+    body: 'Cuts land on the audio — never mid-word, never on silence. A long video becomes polished clips while you grab coffee. No timeline, no scrubbing.',
   },
 ];
 
-const steps = [
-  {
-    n: '01',
-    title: 'Upload',
-    body: 'Drop in a podcast, webinar, interview, vlog, or stream recording.',
-  },
-  {
-    n: '02',
-    title: 'AI finds the moments',
-    body: 'Videotrim transcribes your video, picks the best segments, and cuts on the audio — never mid-word, no silence.',
-  },
-  {
-    n: '03',
-    title: 'Refine',
-    body: 'Adjust the in/out points, fix caption wording, or reanalyze with a new prompt until each clip is exactly how you want it.',
-  },
-  {
-    n: '04',
-    title: 'Get captioned clips',
-    body: 'Export vertical or wide clips with word-perfect captions — ready for every platform.',
-  },
+const workflow = [
+  { n: '01', title: 'Upload', body: 'Drop in a podcast, webinar, interview, vlog, or stream — or paste a YouTube or Vimeo link.' },
+  { n: '02', title: 'AI finds the moments', body: 'Videotrim transcribes, scores, and cuts on the audio to surface a ranked list of clip candidates.' },
+  { n: '03', title: 'Refine', body: 'Adjust the in/out points, fix caption wording, or reanalyze with a new prompt until each clip is right.' },
+  { n: '04', title: 'Export', body: 'Vertical or wide, word-perfect captions, full HD, no watermark — ready for every platform.' },
 ];
 
 const icons: Record<string, string> = {
@@ -105,109 +51,91 @@ const icons: Record<string, string> = {
 };
 ---
 
-<Layout>
-  <!-- Icons by Dwi ridwanto from Noun Project (https://thenounproject.com/browse/collection-icon/artificial-intelligence-line-24px-295290/) — CC BY 3.0 -->
+<Layout
+  title="Features — everything Videotrim does"
+  description="Moment detection, word-perfect auto captions, vertical reframing, and clean cuts — the full feature set that turns a long recording into ready-to-post clips."
+>
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <div class="pointer-events-none absolute -top-32 left-1/2 h-80 w-[42rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
-    <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 pt-16 pb-12 md:pt-24 lg:grid-cols-[2fr_1fr] lg:gap-8">
-      <!-- Left: copy -->
-      <div class="fade-in-up text-center lg:text-left">
-        <h1 class="text-balance font-display text-5xl leading-[1.05] md:text-6xl xl:text-7xl">
-          Turn one long video into <span class="text-primary">short clips</span>
-        </h1>
-        <p class="text-balance mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mx-0">
-          Auto-captioned and ready to post. No editor to learn, no subscription
-          to cancel. Pay only for what you clip.
-        </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
-          <a href="/signup" class="btn btn-primary btn-lg">
-            Start free — no card needed
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="/pricing" class="btn btn-outline btn-lg">See pricing</a>
-        </div>
-        <p class="mt-4 text-xs text-muted-foreground">Try it for free · No subscription required · Pay as you go</p>
-      </div>
-
-      <!-- Right: 3D phone -->
-      <div class="fade-in-up flex justify-center lg:justify-end">
-        <PhoneMockup />
+    <div class="mx-auto max-w-3xl px-5 pt-16 pb-10 text-center md:pt-24">
+      <span class="eyebrow">Features</span>
+      <h1 class="text-balance mt-3 font-display text-5xl leading-[1.05] md:text-6xl">
+        Everything the edit used to take all day
+      </h1>
+      <p class="text-balance mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
+        Videotrim finds the moments, cuts them clean, and captions them for a
+        silent feed — so the only job left is deciding what to post.
+      </p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/signup" class="btn btn-primary btn-lg">Start free — no card needed</a>
+        <a href="/pricing" class="btn btn-outline btn-lg">See pricing</a>
       </div>
     </div>
   </section>
 
-  <!-- Use cases — floating, staggered photo stack -->
-  <section class="overflow-x-clip py-40 md:py-52">
-    <div class="mx-auto max-w-2xl px-5 text-center">
-      <span class="eyebrow">Use cases</span>
-      <h2 class="text-balance mt-3 font-display text-4xl md:text-5xl">Made for anyone who records more than they post</h2>
-      <p class="mt-4 text-muted-foreground">If it's long and worth watching, there are clips inside it.</p>
-    </div>
-
-    <div class="no-scrollbar relative mx-auto mt-20 flex max-w-7xl snap-x snap-mandatory items-center gap-6 overflow-x-auto px-5 py-12 lg:justify-center lg:gap-8 lg:overflow-visible">
-      {useCases.map((uc) => (
-        <article
-          class="float-card group relative aspect-square w-[min(72vw,17rem)] shrink-0 snap-center overflow-hidden rounded-[var(--radius-card)] border border-card-border-subtle"
-          style={`--shift:${uc.shift};--rot:${uc.rot};`}
-        >
-          <img
-            src={uc.img}
-            alt={uc.title}
-            loading="lazy"
-            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-          />
-          <div class="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/55 to-transparent"></div>
-          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
-          <div class="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/45"></div>
-          <p class="absolute left-0 top-0 p-6 text-lg font-semibold uppercase tracking-wide text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)] sm:p-7">{uc.audience}</p>
-          <div class="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
-            <h3 class="font-display text-2xl leading-snug text-white">{uc.title}</h3>
-            <p class="reveal-text max-h-0 overflow-hidden text-sm leading-relaxed text-white/85 opacity-0 group-hover:mt-2.5 group-hover:max-h-40 group-hover:opacity-100">{uc.body}</p>
+  <!-- Feature grid -->
+  <section class="mx-auto max-w-6xl px-5 py-24 md:py-28">
+    <div class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {features.map((f) => (
+        <div class="flex gap-4">
+          <span class="shrink-0 text-primary">
+            <svg viewBox="-5 -10 110 135" fill="currentColor" class="h-14 w-14">
+              <path d={icons[f.icon]} />
+            </svg>
+          </span>
+          <div>
+            <h2 class="text-lg">{f.title}</h2>
+            <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
           </div>
-        </article>
+        </div>
       ))}
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="dark relative isolate overflow-hidden bg-background text-foreground py-40 md:py-52">
+  <!-- Caption spotlight -->
+  <section class="dark relative isolate overflow-hidden bg-background text-foreground py-28 md:py-32">
     <img src="/ai-editor-mockup.jpg" alt="" aria-hidden="true" class="absolute inset-0 -z-10 h-full w-full object-cover" />
     <div class="absolute inset-0 -z-10 bg-black/80"></div>
-    <div class="mx-auto max-w-6xl px-5">
-      <div class="mx-auto max-w-2xl text-center">
-        <span class="eyebrow">Why Videotrim</span>
-        <h2 class="text-balance mt-3 font-display text-4xl md:text-5xl">Everything the edit used to take all day</h2>
+    <div class="mx-auto grid max-w-5xl items-center gap-10 px-5 lg:grid-cols-2">
+      <div>
+        <span class="eyebrow">Built for the mute scroll</span>
+        <h2 class="text-balance mt-3 font-display text-3xl md:text-4xl">Captions are the new thumbnail</h2>
+        <p class="mt-4 leading-relaxed text-muted-foreground">
+          Most short-form is watched without sound, so the first line of caption
+          text is your hook. Videotrim writes word-by-word captions that land in
+          sync with the speaker — the rhythm that keeps a thumb from scrolling on.
+        </p>
+        <a href="/blog/how-muted-viewing-optimization-works/" class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+          How muted-viewing optimization works
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
-
-      <div class="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((f) => (
-          <div class="flex gap-4">
-            <span class="shrink-0 text-primary">
-              <svg viewBox="-5 -10 110 135" fill="currentColor" class="h-16 w-16">
-                <path d={icons[f.icon]} />
-              </svg>
-            </span>
-            <div>
-              <h3 class="text-lg">{f.title}</h3>
-              <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
-            </div>
-          </div>
+      <ul class="space-y-4">
+        {[
+          'Word-level timing, synced to the speaker',
+          'Edit a word — the timing follows automatically',
+          'Presets for font, color, and placement',
+          'Full HD exports, no watermark',
+        ].map((item) => (
+          <li class="flex items-start gap-3 rounded-[var(--radius-card)] border border-card-border-subtle bg-card/40 p-4 text-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 h-4 w-4 shrink-0 text-primary"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>{item}</span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
-  <!-- How it works -->
-  <section class="mx-auto max-w-6xl px-5 py-40 md:py-52">
+  <!-- Workflow -->
+  <section class="mx-auto max-w-6xl px-5 py-24 md:py-28">
     <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">How it works</span>
       <h2 class="text-balance mt-3 font-display text-4xl md:text-5xl">From video to clips in four steps</h2>
       <p class="mt-4 text-muted-foreground">No timeline to learn. No clips to hunt for. Just results.</p>
     </div>
-
     <div class="mt-14 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
-      {steps.map((step) => (
+      {workflow.map((step) => (
         <div class="group relative">
           <span class="font-display text-5xl text-primary/25 transition-colors duration-700 ease-out group-hover:text-primary group-hover:duration-200">{step.n}</span>
           <h3 class="mt-3 text-xl">{step.title}</h3>
@@ -217,19 +145,20 @@ const icons: Record<string, string> = {
     </div>
   </section>
 
-  <!-- CTA hero -->
-  <section class="relative overflow-hidden bg-card px-6 py-32 text-center md:py-44">
-      <div class="pointer-events-none absolute -bottom-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
-      <div class="relative">
-        <h2 class="text-balance mx-auto max-w-2xl font-display text-4xl md:text-5xl">
-          Your next video is hiding clips. Let's find them.
-        </h2>
-        <p class="mx-auto mt-4 max-w-md text-muted-foreground">
-          Sign up free — 2 tokens on us. No subscription, no editing skills, no excuses.
-        </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="/signup" class="btn btn-primary btn-lg">Create free account</a>
-        </div>
+  <!-- CTA -->
+  <section class="relative overflow-hidden bg-card px-6 py-28 text-center md:py-36">
+    <div class="pointer-events-none absolute -bottom-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="relative">
+      <h2 class="text-balance mx-auto max-w-2xl font-display text-4xl md:text-5xl">
+        See it on your own footage
+      </h2>
+      <p class="mx-auto mt-4 max-w-md text-muted-foreground">
+        Sign up free — 2 tokens on us. No subscription, no editing skills required.
+      </p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/signup" class="btn btn-primary btn-lg">Create free account</a>
+        <a href="/use-cases" class="btn btn-outline btn-lg">Explore use cases</a>
       </div>
+    </div>
   </section>
 </Layout>
