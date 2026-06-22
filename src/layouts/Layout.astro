@@ -58,5 +58,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).hr
       <slot />
     </main>
     <Footer />
+
+    <!-- GetResolved chat widget -->
+    <script is:inline>
+      window.GetResolvedConfig = {
+        chatKey: "01bf923dc21b62f2b35a4758b8bf881731112cbd846ca03f",
+      };
+    </script>
+    <script
+      is:inline
+      src="https://app.getresolved.ai/chat/init.js"
+      async></script>
   </body>
 </html>
